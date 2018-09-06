@@ -90,19 +90,40 @@ document.addEventListener('DOMContentLoaded', function() {
   // Open card
   // Disable card
   // Set openedCards array to all cards that are open
+  // var displayCard = function(event) {
+  //   if (event.target.classList.contains('front')) {
+  //     event.target.parentNode.classList.toggle('open');
+  //     event.target.parentNode.classList.toggle('disabled');
+  //     openedCards = deck.querySelectorAll('.open');
+  //     if (openedCards.length === 2) {
+  //       if (openedCards[0].dataset.name === openedCards[1].dataset.name) {
+  //         matched();
+  //       } else {
+  //         unmatched();
+  //       }
+  //       counter++;
+  //       countDisplay.innerHTML = counter;
+  //     }
+  //   }
+  // };
+
+  var openCount = 0;
   var displayCard = function(event) {
-    if (event.target.classList.contains('front')) {
-      event.target.parentNode.classList.toggle('open');
-      event.target.parentNode.classList.toggle('disabled');
-      openedCards = deck.querySelectorAll('.open');
-      if (openedCards.length === 2) {
-        if (openedCards[0].dataset.name === openedCards[1].dataset.name) {
-          matched();
-        } else {
-          unmatched();
+    if (openedCards.length < 2) {
+      if (event.target.classList.contains('front')) {
+        event.target.parentNode.classList.toggle('open');
+        event.target.parentNode.classList.toggle('disabled');
+        openedCards = deck.querySelectorAll('.open');
+        if (openedCards.length === 2) {
+          if (openedCards[0].dataset.name === openedCards[1].dataset.name) {
+            matched();
+          } else {
+            unmatched();
+          }
+
+          counter++;
+          countDisplay.innerHTML = counter;
         }
-        counter++;
-        countDisplay.innerHTML = counter;
       }
     }
   };
@@ -114,6 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
     openedCards[0].classList.remove('open');
     openedCards[1].classList.remove('open');
     matchCounter += 2;
+    openedCards = [];
   }
 
   // Define function when cards don't match
@@ -123,6 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
       openedCards[0].classList.remove('open', 'unmatched', 'disabled');
       openedCards[1].classList.remove('open', 'unmatched', 'disabled');
+      openedCards = [];
     }, 1300);
   }
 
