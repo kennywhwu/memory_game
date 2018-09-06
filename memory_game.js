@@ -89,23 +89,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // Set function for clicking on unopen card
   // Open card
   // Disable card
-  // Set openedCards array to all cards that are open
-  // var displayCard = function(event) {
-  //   if (event.target.classList.contains('front')) {
-  //     event.target.parentNode.classList.toggle('open');
-  //     event.target.parentNode.classList.toggle('disabled');
-  //     openedCards = deck.querySelectorAll('.open');
-  //     if (openedCards.length === 2) {
-  //       if (openedCards[0].dataset.name === openedCards[1].dataset.name) {
-  //         matched();
-  //       } else {
-  //         unmatched();
-  //       }
-  //       counter++;
-  //       countDisplay.innerHTML = counter;
-  //     }
-  //   }
-  // };
 
   var openCount = 0;
   var displayCard = function(event) {
@@ -120,7 +103,6 @@ document.addEventListener('DOMContentLoaded', function() {
           } else {
             unmatched();
           }
-
           counter++;
           countDisplay.innerHTML = counter;
         }
@@ -130,12 +112,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Define function when cards match
   function matched() {
+    matchCounter += 2;
+    openedCards[0].classList.add('matched');
+    openedCards[1].classList.add('matched');
+    openedCards[0].classList.remove('open');
+    openedCards[1].classList.remove('open');
     setTimeout(function() {
-      openedCards[0].classList.add('matched');
-      openedCards[1].classList.add('matched');
-      openedCards[0].classList.remove('open');
-      openedCards[1].classList.remove('open');
-      matchCounter += 2;
       openedCards = [];
     }, 1000);
   }
@@ -153,7 +135,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Define function for game completion
   function complete() {
+    console.log('complete_started');
     if (matchCounter === imgDuplicateArray.length) {
+      console.log('equals');
       saveScore();
       setTimeout(function() {
         alert(
