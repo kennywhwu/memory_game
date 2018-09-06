@@ -130,12 +130,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Define function when cards match
   function matched() {
-    openedCards[0].classList.add('matched');
-    openedCards[1].classList.add('matched');
-    openedCards[0].classList.remove('open');
-    openedCards[1].classList.remove('open');
-    matchCounter += 2;
-    openedCards = [];
+    setTimeout(function() {
+      openedCards[0].classList.add('matched');
+      openedCards[1].classList.add('matched');
+      openedCards[0].classList.remove('open');
+      openedCards[1].classList.remove('open');
+      matchCounter += 2;
+      openedCards = [];
+    }, 1000);
   }
 
   // Define function when cards don't match
