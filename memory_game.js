@@ -135,9 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Define function for game completion
   function complete() {
-    console.log('complete_started');
     if (matchCounter === imgDuplicateArray.length) {
-      console.log('equals');
       saveScore();
       setTimeout(function() {
         alert(
