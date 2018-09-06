@@ -1,0 +1,148 @@
+html,
+body {
+  margin: 0 0;
+  padding: 0;
+  line-height: 1;
+  width: 100%;
+  font-family: 'Cinzel Decorative', cursive;
+  color: rgb(255, 234, 194);
+  background-image: radial-gradient(#60887c, #2d423d, #14201e);
+}
+
+button {
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 14px;
+  padding: 15px;
+  margin: 7px;
+}
+
+.countBox {
+  margin: 1.5rem 1.5rem 1rem 1.5rem;
+  font-size: 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.deck {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 1em;
+  width: 85%;
+  max-width: 650px;
+  background-image: linear-gradient(45deg, #424242, #9e9e9e);
+  list-style-type: none;
+  box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+  border-radius: 40px;
+}
+
+.deck .card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: all 0.4s linear;
+  transform-style: preserve-3d;
+  margin: 1rem;
+}
+
+.card,
+.back,
+.front {
+  height: 7rem;
+  width: 7rem;
+}
+
+.back,
+.front {
+  position: absolute;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+img {
+  max-width: 100%;
+  border-radius: 20px;
+  box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+}
+
+img:hover {
+  cursor: pointer;
+}
+
+.deck .card.open,
+.back {
+  transform: rotateY(180deg);
+  animation-duration: 1.5s;
+}
+
+.deck .card.matched {
+  border-radius: 20px;
+  transform: rotateY(180deg);
+}
+
+.deck .card.matched > .back {
+  transform: rotateY(180deg);
+  backface-visibility: visible;
+  -webkit-backface-visibility: visible;
+  animation-name: emphasize;
+  animation-duration: 0.75s;
+  animation-delay: 0.5s;
+}
+
+.deck .card.unmatched > .back {
+  transform: rotateY(180deg);
+  backface-visibility: visible;
+  -webkit-backface-visibility: visible;
+  animation-name: shake;
+  animation-duration: 0.85s;
+  animation-delay: 0.65s;
+}
+
+.deck .card.disabled {
+  pointer-events: none;
+}
+
+@keyframes emphasize {
+  from {
+    transform: rotateY(180deg) scale(1, 1);
+  }
+
+  50% {
+    transform: rotateY(180deg) scale(1.35, 1.35);
+  }
+
+  to {
+    transform: rotateY(180deg) scale(1, 1);
+  }
+}
+
+@keyframes shake {
+  from {
+    transform: rotateY(180deg) translate(0, 0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: rotateY(180deg) translate(5px);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: rotateY(180deg) translate(-5px);
+  }
+
+  to {
+    transform: rotateY(180deg) translate(0, 0);
+  }
+}
